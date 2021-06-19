@@ -31,7 +31,7 @@
                                 <div class="modal-content-Edit">
                                         <span class="close-Edit" onclick="closeedit()">&times;</span>
                                     <form method="GET" action="Process.php">
-                                        <input type="text" name="idEdit" id="idEdit">
+                                        <input type="hidden" name="idEdit" id="idEdit">
                                         <label for="dname">Display name:</label>
                                         <br>
                                         <input type="text" id="displayNameIDedit">
@@ -128,26 +128,22 @@
     function display()
     {
         $('#TableID').empty();
-        $.ajax( 
-                {
+        $.ajax({
                     url: 'Process.php',
                     type: 'GET',
                     data: {
                         display: 1
                         },
                     dataType: 'json',
-                        }).then((data)=>{
-                            roleDatas = data
-        for(const val of data)
+        }).then((data)=>
+        {
+            roleDatas = data
+            for(const val of data)
             {
-                $('#TableID').prepend("<tr><td>"+val.displayname+"</td><td>"+val.descrip+"</td><td>"
-                                    +"<button onclick='editFunction("+val.id+")' class='fad fa-edit fa-2x' style='color:#e1aa12;cursor: pointer;border:none;background:transparent;'></button>"
-                                    +"<button onclick='deleteFunction("+val.id+")' class='fas fa-trash fa-2x' style='color:#e1aa12;cursor: pointer;border:none;background:transparent;'></button</div>"
-                                    +"</td></tr>")
-            }
-                            colnum();
-                               
-                                        })
+                $('#TableID').prepend(`<tr><td>${val.displayname}</td><td>${val.descrip}</td><td><button onclick='editFunction(${JSON.stringify(val)})' class='fad fa-edit fa-2x' style='color:#e1aa12;cursor: pointer;border:none;background:transparent;'></button></td></tr>`)
+             }
+            colnum();
+        })
     }
 
 
@@ -215,15 +211,11 @@
     // Get the <span> element that closes the modal
     var spanEdit = document.getElementsByClassName("close-Edit")[0];
     // When the user clicks on <span> (x), close the modal
-    function editFunction(id) {
-       
-        console.log(roleDatas)
-        $("#idEdit").val(roleDatas);
-        $('#displayNameIDedit').val();
-        $('#descriptionIDedit').val();
+    function editFunction(data) {
+        $('#displayNameIDedit').val(data.displayname);
+        $('#displayNameIDedit').val(data.displayname);
+        $('#descriptionIDedit').val(data.descrip);
         modalEdit.style.display = "block";
-        /*var n=name.length;
-        console.log(n);*/
       
     }
     function closeedit()
