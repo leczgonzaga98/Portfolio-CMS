@@ -1,0 +1,28 @@
+.logindiv
+{
+    background-color: #e6f7ff;
+    margin: auto;
+    width: 30%;
+    border: 3px solid rgb(2, 46, 71);
+    padding: 10px;
+    position:absolute;
+    top:190px;
+    left:490px;
+     
+}
+#login
+{
+    text-align:center;
+}
+#btn1
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px 0px 0px 0px;  
+}
+
+.bods
+{
+    background-image:linear-gradient(to bottom right,#13547a,#80d0c7);
+}
